@@ -23,8 +23,11 @@ const RechercheBus = () => {
   };
 
   // Fonction pour rechercher l'itinéraire entre les deux localisations
+  const [loading, setLoading] = useState(false); // Ajouter un état de chargement
+
   const handleSearch = async () => {
     try {
+      setLoading(true); // Démarrer le chargement
       const startLoc = await geocode(startQuery);
       const endLoc = await geocode(endQuery);
   
@@ -32,22 +35,23 @@ const RechercheBus = () => {
         setStartLocation(startLoc);
         setEndLocation(endLoc);
   
-        // Requête pour récupérer l'itinéraire entre les deux points
         const response = await axios.get(
           `http://router.project-osrm.org/route/v1/driving/${startLoc.lng},${startLoc.lat};${endLoc.lng},${endLoc.lat}?geometries=geojson`
         );
   
         const coordinates = response.data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
-        setRoute(coordinates); // On stocke les coordonnées pour dessiner le trajet
+        setRoute(coordinates);
       } else {
         alert('Impossible de trouver les emplacements, veuillez vérifier les noms de lieux.');
       }
     } catch (error) {
-      console.error('Erreur réseau ou API:', error); // Affiche l'erreur dans la console
+      console.error('Erreur réseau ou API:', error);
       alert('Une erreur est survenue lors de la recherche de l’itinéraire. Veuillez réessayer.');
+    } finally {
+      setLoading(false); // Arrêter le chargement
     }
   };
-
+  
   const position = [-21.453611, 47.085833]; // Coordonnées initiales centrées sur Fianarantsoa
 
   return (
@@ -67,36 +71,33 @@ const RechercheBus = () => {
           placeholder="Lieu de destination"
           className="searchInput"
         />
-        <button onClick={handleSearch} className="searchButton">
-          Rechercher
+        <button onClick={handleSearch} className="searchButton" disabled={loading}>
+          {loading ? 'Recherche en cours...' : 'Rechercher'}
         </button>
       </div>
-
+  
+      {loading && <p>Recherche d'itinéraire en cours...</p>} {/* Message de chargement */}
+      
       <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '500px', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-
         {startLocation && (
           <Marker position={[startLocation.lat, startLocation.lng]} icon={L.icon({ iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png', iconSize: [25, 41] })}>
             <Popup>Départ: {startQuery}</Popup>
           </Marker>
         )}
-
         {endLocation && (
           <Marker position={[endLocation.lat, endLocation.lng]} icon={L.icon({ iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png', iconSize: [25, 41] })}>
             <Popup>Destination: {endQuery}</Popup>
           </Marker>
         )}
-
-        {/* Si un itinéraire est disponible, on le trace */}
-        {route && (
-          <Polyline positions={route} color="blue" />
-        )}
+        {route && <Polyline positions={route} color="blue" />}
       </MapContainer>
     </div>
   );
+  
 };
 
 export default RechercheBus;

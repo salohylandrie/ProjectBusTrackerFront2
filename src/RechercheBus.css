@@ -1,23 +1,28 @@
 .container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 20px;
   }
   
   .searchContainer {
+    width: 100%;
+    max-width: 600px; /* Limite la taille pour les grands écrans */
+    display: flex;
+    flex-direction: column;
     margin-bottom: 20px;
   }
   
   .searchInput {
-    margin: 5px;
+    width: 100%;
     padding: 10px;
-    width: 200px;
+    margin-bottom: 10px;
     font-size: 16px;
   }
   
   .searchButton {
-    padding: 10px 20px;
+    padding: 10px;
     font-size: 16px;
     background-color: #007bff;
     color: white;
@@ -27,5 +32,32 @@
   
   .searchButton:hover {
     background-color: #0056b3;
+  }
+  
+  /* Responsiveness for Map */
+  .leaflet-container {
+    width: 100%;
+    height: 400px;
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .leaflet-container {
+      height: 500px; /* Plus grand pour les écrans larges */
+    }
+  
+    .searchContainer {
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .searchInput {
+      flex: 1;
+      margin-right: 10px;
+    }
+  
+    .searchButton {
+      flex: 0;
+    }
   }
   
