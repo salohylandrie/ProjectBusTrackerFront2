@@ -32,13 +32,18 @@ const RechercheBus = () => {
         setStartLocation(startLoc);
         setEndLocation(endLoc);
   
-        // Requête pour récupérer l'itinéraire entre les deux points
         const response = await axios.get(
           `http://router.project-osrm.org/route/v1/driving/${startLoc.lng},${startLoc.lat};${endLoc.lng},${endLoc.lat}?geometries=geojson`
         );
   
-        const coordinates = response.data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
-        setRoute(coordinates); // On stocke les coordonnées pour dessiner le trajet
+        console.log("Response from OSRM:", response.data); // Affiche la réponse complète de l'API
+  
+        if (response.data.routes && response.data.routes.length > 0) {
+          const coordinates = response.data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
+          setRoute(coordinates);
+        } else {
+          alert('Aucun itinéraire trouvé entre ces deux points.');
+        }
       } else {
         alert('Impossible de trouver les emplacements, veuillez vérifier les noms de lieux.');
       }
@@ -47,6 +52,7 @@ const RechercheBus = () => {
       alert('Une erreur est survenue lors de la recherche de l’itinéraire. Veuillez réessayer.');
     }
   };
+  
 
   const position = [-21.453611, 47.085833]; // Coordonnées initiales centrées sur Fianarantsoa
 
