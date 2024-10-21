@@ -98,7 +98,7 @@ const Auth = () => {
                     onChange={(e) => setLoginPassword(e.target.value)}
                     required
                 />
-                <button type="submit">Se connecter</button>
+                <button type="submit">S connecter</button>
                 {loginMessage && <p className="message">{loginMessage}</p>}
             </form>
         </div>
