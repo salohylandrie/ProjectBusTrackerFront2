@@ -1,108 +1,70 @@
 import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import L from 'leaflet';
 import axios from 'axios';
-import './Auth.css'; // Importation du fichier CSS pour la mise en page
+import 'leaflet/dist/leaflet.css';
+import './RechercheBus.css'; // Importez votre fichier CSS
 
-const Auth = () => {
-    // États pour l'inscription
-    const [registerUsername, setRegisterUsername] = useState('');
-    const [registerPassword, setRegisterPassword] = useState('');
-    const [registerEmail, setRegisterEmail] = useState('');
-    const [registerMessage, setRegisterMessage] = useState('');
+const RechercheBus = () => {
+  const busLines = [
+    {
+      id: 22,
+      name: 'Ligne 22 - Ambozontany (cathédrale) – Ampopoka',
+      stops: [
+        { name: 'Ambozontany (cathédrale)', latitude: -21.45, longitude: 47.09 },
+        { name: 'Ampopoka', latitude: -21.47, longitude: 47.11 },
+      ],
+    },
+    // Ajouter d'autres lignes de bus...
+  ];
 
-    // États pour la connexion
-    const [loginUsername, setLoginUsername] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
-    const [loginMessage, setLoginMessage] = useState('');
+  const [startLocation, setStartLocation] = useState(null);
+  const [endLocation, setEndLocation] = useState(null);
+  const [route, setRoute] = useState(null);
 
-    // Gestion de l'inscription
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8000/register/', {
-                username: registerUsername,
-                password: registerPassword,
-                email: registerEmail,
-            });
-            setRegisterMessage(response.data.message);
-        } catch (error) {
-            if (error.response) {
-                setRegisterMessage(error.response.data.message);
-            } else {
-                setRegisterMessage("Erreur lors de l'inscription.");
-            }
-        }
-    };
+  const handleSearch = async () => {
+    if (startLocation && endLocation) {
+      // Logique pour rechercher l'itinéraire entre les deux points
+      const response = await axios.get(`http://router.project-osrm.org/route/v1/driving/${startLocation.lng},${startLocation.lat};${endLocation.lng},${endLocation.lat}?geometries=geojson`);
+      
+      const coordinates = response.data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
+      setRoute(coordinates);
+    }
+  };
 
-    // Gestion de la connexion
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8000/login/', {
-                username: loginUsername,
-                password: loginPassword,
-            });
-            setLoginMessage(response.data.message);
-        } catch (error) {
-            if (error.response) {
-                setLoginMessage(error.response.data.message);
-            } else {
-                setLoginMessage("Erreur lors de la connexion.");
-            }
-        }
-    };
+  const position = [-21.453611, 47.085833]; // Coordonnées initiales
 
-    return (
-        <div className="auth-container">
-            {/* Formulaire d'inscription */}
-            <form className="form" onSubmit={handleRegister}>
-                <h2>Inscription</h2>
-                <input
-                    type="text"
-                    placeholder="Nom d'utilisateur"
-                    value={registerUsername}
-                    onChange={(e) => setRegisterUsername(e.target.value)}
-                    required
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={registerEmail}
-                    onChange={(e) => setRegisterEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Mot de passe"
-                    value={registerPassword}
-                    onChange={(e) => setRegisterPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">S'inscrire</button>
-                {registerMessage && <p className="message">{registerMessage}</p>}
-            </form>
+  return (
+    <div className="container">
+      <div className="searchContainer">
+        {/* Vos inputs de recherche pour le départ et l'arrivée */}
+      </div>
 
-            {/* Formulaire de connexion */}
-            <form className="form" onSubmit={handleLogin}>
-                <h2>Connexion</h2>
-                <input
-                    type="text"
-                    placeholder="Nom d'utilisateur"
-                    value={loginUsername}
-                    onChange={(e) => setLoginUsername(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Mot de passe"
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">S connecter</button>
-                {loginMessage && <p className="message">{loginMessage}</p>}
-            </form>
-        </div>
-    );
+      {/* MapContainer de React Leaflet */}
+      <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '500px', width: '100%' }}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        
+        {startLocation && (
+          <Marker position={[startLocation.lat, startLocation.lng]} icon={L.icon({ iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png', iconSize: [25, 41] })}>
+            <Popup>Start Location</Popup>
+          </Marker>
+        )}
+
+        {endLocation && (
+          <Marker position={[endLocation.lat, endLocation.lng]} icon={L.icon({ iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png', iconSize: [25, 41] })}>
+            <Popup>End Location</Popup>
+          </Marker>
+        )}
+
+        {route && (
+          <Polyline positions={route} color="blue" />
+        )}
+      </MapContainer>
+    </div>
+  );
 };
 
-export default Auth;
+export default RechercheBus;
