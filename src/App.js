@@ -27,36 +27,37 @@ const RechercheBus = () => {
 
   const handleSearch = async () => {
     try {
-      console.log("Recherche des emplacements pour :", startQuery, endQuery); // Log de la recherche
       setLoading(true);
-      
       const startLoc = await geocode(startQuery);
-      console.log("Coordonnées du départ :", startLoc); // Log des coordonnées de départ
       const endLoc = await geocode(endQuery);
-      console.log("Coordonnées de la destination :", endLoc); // Log des coordonnées d'arrivée
   
-      if (startLoc && endLoc) {
-        setStartLocation(startLoc);
-        setEndLocation(endLoc);
+      if (!startLoc || !endLoc) {
+        alert('Impossible de trouver les emplacements, veuillez vérifier les noms de lieux.');
+        return;
+      }
   
-        const response = await axios.get(
-          `http://router.project-osrm.org/route/v1/driving/${startLoc.lng},${startLoc.lat};${endLoc.lng},${endLoc.lat}?geometries=geojson`
-        );
-        
-        console.log("Réponse de l'API OSRM :", response); // Log de la réponse API
+      setStartLocation(startLoc);
+      setEndLocation(endLoc);
   
+      const response = await axios.get(
+        `http://router.project-osrm.org/route/v1/driving/${startLoc.lng},${startLoc.lat};${endLoc.lng},${endLoc.lat}?geometries=geojson`
+      );
+  
+      if (response.data && response.data.routes.length > 0) {
         const coordinates = response.data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
         setRoute(coordinates);
       } else {
-        alert('Impossible de trouver les emplacements, veuillez vérifier les noms de lieux.');
+        alert('Itinéraire non trouvé.');
       }
+  
     } catch (error) {
       console.error('Erreur réseau ou API:', error); // Affiche l'erreur complète
-      alert('Une erreur est survenue lors de la recherche de l’itinéraire. Veuillez réessayer.');
+      alert('Une erreur est survenue lors de la recherche de l’itinéraire. Vérifiez votre connexion.');
     } finally {
       setLoading(false);
     }
   };
+  
   
   
   const position = [-21.453611, 47.085833]; // Coordonnées initiales centrées sur Fianarantsoa
