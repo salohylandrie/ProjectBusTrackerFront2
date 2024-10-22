@@ -18,7 +18,7 @@ const Auth = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/register/', {
+            const response = await axios.post('https://2f88-41-77-17-174.ngrok-free.app/register/', {
                 username: registerUsername,
                 password: registerPassword,
                 email: registerEmail,
@@ -37,7 +37,7 @@ const Auth = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/login/', {
+            const response = await axios.post('https://2f88-41-77-17-174.ngrok-free.app/login/', {
                 username: loginUsername,
                 password: loginPassword,
             });
