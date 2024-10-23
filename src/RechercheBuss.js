@@ -32,7 +32,7 @@ const RechercheBus = () => {
         </button>
       </div>
 
-      {/* Remplacement de la carte par une image statique */}
+      
       <div className="mapContainer">
         <img
          src={require('./Capture.PNG')}
@@ -41,6 +41,8 @@ const RechercheBus = () => {
         />
       </div>
     </div>
+
+    
   );
 };
 

@@ -10,12 +10,12 @@ html, body, #root {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  position: relative;
+  position: flex;
 }
 
 .searchContainer {
   position: absolute;
-  top: 10px;
+  top: 550px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
