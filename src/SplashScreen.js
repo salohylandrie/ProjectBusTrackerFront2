@@ -18,7 +18,7 @@ const SplashScreen = () => {
     return (
         <div className="splash-container">
             <img src={require('./IMG-20241001-WA0000.jpg')} alt="Splash Screen" className="splash-image" />
-            <h1>FIARABUS</h1>
+            
         </div>
     );
 };
