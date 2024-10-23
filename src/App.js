@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Auth from './Auth';
 import RechercheBus from './RechercheBuss'; // Assurez-vous que le chemin est correct
 
-
 const App = () => {
     return (
         <Router>
