@@ -35,7 +35,7 @@ const RechercheBus = () => {
       {/* Remplacement de la carte par une image statique */}
       <div className="mapContainer">
         <img
-          src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/w_1920,c_limit/GoogleMapTA.jpg" // Remplacez par l'URL de votre image de carte
+         src={require('./Capture.PNG')}
           alt="Carte de la ville"
           className="mapImage"
         />
