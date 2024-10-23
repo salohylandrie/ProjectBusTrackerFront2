@@ -1,63 +1,59 @@
+/* Plein écran pour l'image de la carte */
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .searchContainer {
-    width: 100%;
-    max-width: 600px; /* Limite la taille pour les grands écrans */
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .searchInput {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  
-  .searchButton {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .searchButton:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsiveness for Map */
-  .leaflet-container {
-    width: 100%;
-    height: 400px;
-  }
-  
-  /* Responsive adjustments */
-  @media (min-width: 768px) {
-    .leaflet-container {
-      height: 500px; /* Plus grand pour les écrans larges */
-    }
-  
-    .searchContainer {
-      flex-direction: row;
-      align-items: center;
-    }
-  
-    .searchInput {
-      flex: 1;
-      margin-right: 10px;
-    }
-  
-    .searchButton {
-      flex: 0;
-    }
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.searchContainer {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+}
+
+.searchInput {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.searchButton {
+  padding: 10px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #005bb5;
+}
+
+.mapContainer {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
