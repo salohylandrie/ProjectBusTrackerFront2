@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importation de useNavigate
 import './RechercheBus.css';
 
 const RechercheBus = () => {
   const [startQuery, setStartQuery] = useState(''); // Champs de recherche pour la localisation de départ
   const [endQuery, setEndQuery] = useState(''); // Champs de recherche pour la localisation de destination
+  const navigate = useNavigate(); // Hook pour naviguer vers une autre page
 
   // Fonction de recherche (sans calcul d'itinéraire)
   const handleSearch = () => {
-    alert(`Recherche de bus entre ${startQuery} et ${endQuery}`);
+    // Redirige vers la page de liste des bus avec les paramètres de recherche
+    navigate(`/bus-list?start=${startQuery}&end=${endQuery}`);
   };
 
   return (
@@ -32,17 +35,14 @@ const RechercheBus = () => {
         </button>
       </div>
 
-      
       <div className="mapContainer">
         <img
-         src={require('./Capture.PNG')}
+          src={require('./Capture.PNG')}
           alt="Carte de la ville"
           className="mapImage"
         />
       </div>
     </div>
-
-    
   );
 };
 
