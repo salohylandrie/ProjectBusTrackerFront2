@@ -4,6 +4,7 @@ import SplashScreen from './SplashScreen'; // Importation du SplashScreen
 import Auth from './Auth';
 import RechercheBus from './RechercheBuss'; // Assurez-vous que le chemin est correct
 import BusList from './BusList'; // Importation du composant de la liste des bus
+import AdminDashboard from './AdminDashboard'; // Assurez-vous que le chemin est correct
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/recherche-bus" element={<RechercheBus />} />
                 <Route path="/bus-list" element={<BusList />} /> {/* Route vers la liste des bus */}
+                <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Page admin */}
             </Routes>
         </Router>
     );
