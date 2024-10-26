@@ -1,0 +1,39 @@
+/* Navbar.css */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .navbar-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .navbar-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .navbar-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-icons .icon {
+    font-size: 24px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  

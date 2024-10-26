@@ -1,33 +1,24 @@
+/* AdminDashboard.css */
+
 .admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; /* Offset for fixed navbar */
+  }
+  
+  .dashboard-content {
+    display: flex;
+  }
+  
+  .main-content {
     padding: 20px;
-}
-
-h1, h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-.error-message {
-    color: red;
-    text-align: center;
-    margin-top: 10px;
-}
+    margin-left: 200px;
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 60px; /* Adjust for collapsed sidebar on mobile */
+    }
+  }
+  

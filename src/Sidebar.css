@@ -1,0 +1,88 @@
+/* Sidebar.css */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding-top: 20px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.closed {
+    width: 60px; /* Narrower sidebar when closed */
+  }
+  
+  .sidebar h2 {
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    display: none; /* Hide title for small screens */
+  }
+  
+  .sidebar.open h2 {
+    display: block;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar ul li a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #575757;
+    color: white;
+  }
+  
+  .sidebar ul li a svg {
+    margin-right: 8px; /* Spacing between icon and text */
+  }
+  
+  .toggle-button {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 60px; /* Collapse sidebar on smaller screens */
+    }
+  
+    .sidebar.open {
+      width: 200px;
+    }
+  
+    .sidebar ul li a span {
+      display: none; /* Hide text when sidebar is closed */
+    }
+  
+    .sidebar.open ul li a span {
+      display: inline; /* Show text only when sidebar is open */
+    }
+  }
+  

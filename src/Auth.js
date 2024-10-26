@@ -35,7 +35,7 @@ const Auth = () => {
                 requestData.admin_code = registerAdminCode; // Envoyer le code admin
             }
 
-            const response = await axios.post('https://d6f8-41-77-17-1.ngrok-free.app/register/', requestData);
+            const response = await axios.post('https://9c75-41-77-17-1.ngrok-free.app/register/', requestData);
             setRegisterMessage(response.data.message);
         } catch (error) {
             if (error.response) {
@@ -50,7 +50,7 @@ const Auth = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://d6f8-41-77-17-1.ngrok-free.app/login/', {
+            const response = await axios.post('https://9c75-41-77-17-1.ngrok-free.app/login/', {
                 username: loginUsername,
                 password: loginPassword,
             });
