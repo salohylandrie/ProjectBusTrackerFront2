@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import RechercheBus from './RechercheBuss'; // Assurez-vous que le chemin est correct.
-import TrajetList from './AdminDashboard'; // Assurez-vous que le chemin est correct.
+import AdminDashboard from './AdminDashboard'; // Assurez-vous que le chemin est correct.
 import './Auth.css';
 
 const Auth = () => {
@@ -155,7 +155,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Auth />} />
                 <Route path="/recherche-bus" element={<RechercheBus />} />
-                <Route path="/admin-dashboard" element={<TrajetList />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
             </Routes>
         </Router>
     );
