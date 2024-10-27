@@ -16,7 +16,6 @@ function AdminDashboard() {
       <div className="dashboard-content">
         <Sidebar isOpen={isSidebarOpen} />
         <main className="main-content">
-          {/* Your main content goes here */}
           <h1>Welcome to the Admin Dashboard</h1>
         </main>
       </div>

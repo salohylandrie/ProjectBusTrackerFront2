@@ -1,27 +1,26 @@
-// Sidebar.js
-import React from "react";
-import { FaBus, FaUser } from "react-icons/fa";
-import "./Sidebar.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaBus, FaUser } from 'react-icons/fa'; // Import icons
+import './Sidebar.css';
 
-const Sidebar = ({ isOpen, toggleSidebar }) => (
-  <div className={`sidebar ${isOpen ? "open" : ""}`}>
-    <div className="sidebar-header">
-      
-   
-    </div>
-    <nav>
+function Sidebar({ isOpen }) {
+  return (
+    <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
+      <h2>Admin Dashboard</h2>
       <ul>
         <li>
-          <FaBus className="icon" />
-          <span>Générer Bus</span>
+          <Link to="/generer-bus">
+            <FaBus /> Générer Bus
+          </Link>
         </li>
         <li>
-          <FaUser className="icon" />
-          <span>Générer Conducteur</span>
+          <Link to="/generer-conducteur">
+            <FaUser /> Générer Conducteur
+          </Link>
         </li>
       </ul>
-    </nav>
-  </div>
-);
+    </div>
+  );
+}
 
 export default Sidebar;

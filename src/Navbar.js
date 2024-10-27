@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBars, FaBell, FaUserCircle } from 'react-icons/fa'; // Import icons
+import { FaBars, FaBell, FaUserCircle } from 'react-icons/fa';
 import './Navbar.css';
 
 function Navbar({ toggleSidebar }) {
