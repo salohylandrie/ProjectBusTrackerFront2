@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
+import { Outlet } from 'react-router-dom';
 import './AdminDashboard.css';
 
 function AdminDashboard() {
@@ -16,7 +17,7 @@ function AdminDashboard() {
       <div className="dashboard-content">
         <Sidebar isOpen={isSidebarOpen} />
         <main className="main-content">
-          <h1>Welcome to the Admin Dashboard</h1>
+          <Outlet /> {/* Rendu des pages enfants */}
         </main>
       </div>
     </div>

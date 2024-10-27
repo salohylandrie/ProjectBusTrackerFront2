@@ -63,7 +63,7 @@ const Auth = () => {
                 
                 // Redirige en fonction du rôle
                 if (userRole === 'admin') {
-                    navigate('/admin-dashboard'); // Redirige vers AdminDashboard si c'est un admin
+                    navigate('/'); // Redirige vers AdminDashboard si c'est un admin
                 } else {
                     navigate('/recherche-bus'); // Redirige vers RechercheBus pour un utilisateur normal
                 }

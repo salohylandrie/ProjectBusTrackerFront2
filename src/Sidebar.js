@@ -6,13 +6,17 @@ import './Sidebar.css';
 function Sidebar({ isOpen }) {
   return (
     <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
-      <h2>Admin Dashboard</h2>
+      
       <ul>
+        <br></br>
+        <br></br>
         <li>
           <Link to="/generer-bus">
             <FaBus /> Générer Bus
           </Link>
         </li>
+        <br></br>
+        <br></br>
         <li>
           <Link to="/generer-conducteur">
             <FaUser /> Générer Conducteur
